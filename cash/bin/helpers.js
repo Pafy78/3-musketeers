@@ -8,6 +8,13 @@ const config = new Conf();
 
 updateNotifier({pkg}).notify();
 
+
+/*
+ *Save default value in the json file and display result when it done with the json file path
+ *@name saveCurrencies
+ *@param {json} argv - contain the parameters in the cmd
+ *@return 
+ */
 const saveCurrencies = argv => {
   config.set('defaultFrom', argv[1] || config.get('defaultFrom', 'USD'));
   config.set(
@@ -20,11 +27,22 @@ const saveCurrencies = argv => {
   process.exit(1);
 };
 
+
+/*
+ *Display the version value of the json file
+ *@name version
+ */
 const version = () => {
   console.log(pkg.version);
   process.exit(1);
 };
 
+
+/*
+ *Display all help informations
+ *@name help
+ *@return 
+ */
 const help = () => {
   console.log(`
 Usage:
@@ -57,6 +75,13 @@ Examples:
   process.exit(1);
 };
 
+
+/*
+ *Call intern function depend of parameters args 
+ *@name helpers
+ *@param {json} argv - cmd argument when start the action
+ *@return 
+ */
 const helpers = argv => {
   // Version
   if (argv.indexOf('--version') !== - 1 || argv.indexOf('-v') !== - 1) {
@@ -72,6 +97,7 @@ const helpers = argv => {
     help();
   }
 
+  // Default settings
   if (
     argv.indexOf('--save') !== - 1
     || argv.indexOf('-s') !== - 1
